@@ -9,17 +9,31 @@ from ui.file_panel import FilePanel
 class FileManagerApp(App):
     TITLE = "TUI File Manager"
 
+    CSS = """
+    Screen {
+        background: $surface;
+    }
+    """
+
     BINDINGS = [
-        ("q", "quit", "Quit"),
+        ("q",         "quit",       "Quit"),
+        ("up",        "",           "Up"),
+        ("down",      "",           "Down"),
+        ("enter",     "",           "Open / Read"),
+        ("backspace", "",           "Go up"),
+        ("d",         "",           "Delete"),
+        ("r",         "",           "Rename"),
+        ("n",         "",           "New file"),
+        ("m",         "",           "New folder"),
+        ("c",         "",           "Copy path"),
     ]
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield Horizontal(FilePanel(Path.cwd()))
+        yield FilePanel(Path.cwd())
         yield Footer()
 
 
 if __name__ == "__main__":
     app = FileManagerApp()
     app.run()
-
